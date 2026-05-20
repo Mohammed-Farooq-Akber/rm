@@ -1,23 +1,3 @@
-<think>
-The user is pointing out a syntax error in the code. Looking at the code:
-
-```javascript
-app.post('/api/orders', (const { user_id, session_id, delivery_address, payment_method, notes } = req.body;
-```
-
-There's a missing opening parenthesis and the arrow function is malformed. It should be:
-
-```javascript
-app.post('/api/orders', (req, res) => {
-    const { user_id, session_id, delivery_address, payment_method, notes } = req.body;
-```
-
-Let me provide the corrected server.js file.
-</think>
-
-No, there's a syntax error! Here's the corrected full server.js:
-
-```javascript
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
