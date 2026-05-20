@@ -195,10 +195,11 @@ app.post('/api/auth/register', (req, res) => {
     
     const id = uuidv4();
     const hashedPassword = bcrypt.hashSync(password, 10);
-    db.run("INSERT INTO users (id, name, email, password, phone, address) VALUES (?, ?, ?, ?, ?)", [id, name, email, hashedPassword, phone || '', address || '']);
+    db.run("INSERT INTO users (id, name, email, password, phone, address, role) VALUES (?, ?, ?, ?, ?, ?, 'customer')", [id, name, email, hashedPassword, phone || '', address || '']);
     saveDatabase();
     res.json({ success: true });
 });
+
 
 app.post('/api/auth/login', (req, res) => {
     const { email, password } = req.body;
