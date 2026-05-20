@@ -1,3 +1,8 @@
+
+
+# Complete Updated index.html
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +29,6 @@
             --light-gray: #ecf0f1;
         }
 
-        /* HEADER */
         .header { background: var(--white); box-shadow: 0 2px 20px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
         .header-inner { max-width: 1400px; margin: 0 auto; padding: 15px 20px; display: flex; align-items: center; gap: 20px; }
         .logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 800; color: var(--primary); }
@@ -40,17 +44,14 @@
         .cart-btn { position: relative; }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; font-size: 10px; font-weight: 600; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-        /* NAVIGATION */
         .nav { background: var(--primary); padding: 12px 0; overflow-x: auto; }
         .nav::-webkit-scrollbar { display: none; }
         .nav-list { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; gap: 15px; list-style: none; flex-wrap: nowrap; }
         .nav-item { color: white; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 25px; white-space: nowrap; transition: all 0.3s; cursor: pointer; }
         .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.2); }
 
-        /* MAIN */
         .main { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
 
-        /* HERO */
         .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border-radius: 20px; padding: 60px; margin-bottom: 40px; color: white; }
         .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 15px; }
         .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 25px; }
@@ -59,15 +60,12 @@
         .hero-stat-num { font-size: 32px; font-weight: 700; }
         .hero-stat-text { font-size: 13px; opacity: 0.8; }
 
-        /* SECTIONS */
         .section { margin-bottom: 50px; }
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .section-title { font-size: 24px; font-weight: 700; }
 
-        /* PRODUCTS GRID */
         .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
 
-        /* PRODUCT CARD */
         .product-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 3px 15px rgba(0,0,0,0.06); transition: all 0.3s; }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
         .product-image { height: 200px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
@@ -92,13 +90,11 @@
         .add-to-cart:hover { background: var(--primary); color: white; }
         .add-to-cart:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* EMPTY STATE */
         .empty-state { text-align: center; padding: 80px 20px; background: var(--white); border-radius: 16px; }
         .empty-state i { font-size: 80px; color: #ddd; margin-bottom: 20px; display: block; }
         .empty-state h3 { font-size: 20px; margin-bottom: 10px; }
         .empty-state p { color: var(--gray); }
 
-        /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s; }
         .modal.show { opacity: 1; visibility: visible; }
         .modal-content { background: var(--white); border-radius: 20px; width: 95%; max-width: 450px; max-height: 90vh; overflow-y: auto; transform: scale(0.9); transition: transform 0.3s; }
@@ -108,14 +104,12 @@
         .modal-close { background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer; }
         .modal-body { padding: 25px; }
 
-        /* AUTH TABS */
         .auth-tabs { display: flex; border-bottom: 2px solid #eee; margin-bottom: 25px; }
         .auth-tab { flex: 1; padding: 15px; text-align: center; font-weight: 600; font-size: 15px; color: var(--gray); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s; }
         .auth-tab.active { color: var(--primary); border-color: var(--primary); }
         .auth-form { display: none; }
         .auth-form.active { display: block; }
 
-        /* FORM */
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 14px 18px; border: 2px solid #eee; border-radius: 12px; font-size: 14px; transition: all 0.3s; }
@@ -123,7 +117,6 @@
         .form-btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
         .form-error { color: var(--danger); font-size: 13px; margin-top: 5px; }
 
-        /* CART SIDEBAR */
         .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s; }
         .cart-overlay.show { opacity: 1; visibility: visible; }
         .cart-sidebar { position: fixed; top: 0; right: -420px; width: 400px; max-width: 100%; height: 100%; background: var(--white); z-index: 1000; transition: right 0.3s; display: flex; flex-direction: column; }
@@ -153,12 +146,10 @@
         .checkout-btn:hover { background: var(--primary-dark); }
         .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* TOAST */
         .toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2000; }
         .toast { background: #2c3e50; color: white; padding: 15px 25px; border-radius: 10px; font-size: 14px; font-weight: 500; animation: slideUp 0.3s ease; display: flex; align-items: center; gap: 10px; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* FOOTER */
         .footer { background: var(--secondary); color: white; padding: 50px 0 20px; margin-top: 50px; }
         .footer-inner { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 40px; }
@@ -169,7 +160,6 @@
         .footer-links a { color: rgba(255,255,255,0.7); font-size: 14px; }
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: rgba(255,255,255,0.5); }
 
-        /* USER MENU */
         .user-menu { position: relative; display: none; }
         .user-menu.show { display: block; }
         .user-dropdown { position: absolute; top: 100%; right: 0; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); min-width: 200px; padding: 10px; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; z-index: 100; }
@@ -178,12 +168,10 @@
         .user-dropdown-item:hover { background: var(--light-gray); }
         .user-dropdown-item.danger { color: var(--danger); }
 
-        /* LOADING */
         .loading { display: flex; align-items: center; justify-content: center; padding: 40px; }
         .spinner { width: 40px; height: 40px; border: 4px solid var(--light-gray); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* UTILITIES */
         .hidden { display: none !important; }
         
         @media (max-width: 768px) {
@@ -211,12 +199,10 @@
                 <button onclick="searchProducts()"><i class="ri-search-line"></i></button>
             </div>
             <div class="header-actions">
-                <!-- AUTH BUTTONS -->
                 <button class="header-btn" id="loginBtn" onclick="openAuthModal('login')">
                     <i class="ri-user-line"></i>
                     <span>Login</span>
                 </button>
-                <!-- USER MENU -->
                 <div class="user-menu" id="userMenu">
                     <button class="header-btn" onclick="toggleUserDropdown()">
                         <i class="ri-user-line"></i>
@@ -231,7 +217,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- CART -->
                 <button class="header-btn cart-btn" onclick="openCart()">
                     <i class="ri-shopping-cart-line"></i>
                     <span>Cart</span>
@@ -253,7 +238,6 @@
 
     <!-- MAIN -->
     <main class="main">
-        <!-- HERO -->
         <section class="hero">
             <div>
                 <h1>Fresh Groceries<br>Delivered Fast</h1>
@@ -267,7 +251,6 @@
             </div>
         </section>
 
-        <!-- PRODUCTS SECTION -->
         <section class="section">
             <div class="section-header">
                 <h2 class="section-title" id="sectionTitle">All Products</h2>
@@ -319,7 +302,6 @@
                     <div class="auth-tab" onclick="switchAuthTab('register')">Register</div>
                 </div>
                 
-                <!-- LOGIN FORM -->
                 <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
                     <div class="form-group">
                         <label>Email</label>
@@ -333,7 +315,6 @@
                     <button type="submit" class="form-btn">Login</button>
                 </form>
 
-                <!-- REGISTER FORM -->
                 <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
                     <div class="form-group">
                         <label>Name</label>
@@ -371,9 +352,16 @@
             </div>
             <div class="modal-body">
                 <form id="checkoutForm" onsubmit="handleCheckout(event)">
+                    <div class="form-group" id="useSavedAddressGroup" style="display:none;">
+                        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                            <input type="checkbox" id="useSavedAddress" onchange="toggleSavedAddress()">
+                            Use my saved address
+                        </label>
+                    </div>
+                    
                     <div class="form-group">
                         <label>Delivery Address</label>
-                        <textarea name="address" required rows="3" placeholder="Enter address"></textarea>
+                        <textarea name="address" id="deliveryAddress" required rows="3" placeholder="Enter delivery address"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Payment Method</label>
@@ -637,14 +625,19 @@
 
         async function loadCart() {
             try {
-                const result = await api('/api/cart?user_id=' + (currentUser?.id || '') + '&session_id=' + (currentUser ? '' : sessionId));
+                const userId = currentUser?.id || '';
+                const sessId = currentUser ? '' : sessionId;
+                const result = await api('/api/cart?user_id=' + userId + '&session_id=' + sessId);
+                
                 if (result.success) {
                     cart = result.data;
                     renderCart();
-                    document.getElementById('cartBadge').textContent = cart.length;
+                    
+                    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                    document.getElementById('cartBadge').textContent = totalItems;
                 }
             } catch (error) {
-                console.error('Cart error');
+                console.error('Cart error:', error);
             }
         }
 
@@ -660,53 +653,67 @@
                 return;
             }
             
-            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
-            totalEl.textContent = '$' + total.toFixed(2);
-            checkoutBtn.disabled = false;
+            let total = 0;
             
-            container.innerHTML = cart.map((item, index) => {
+            container.innerHTML = cart.map((item) => {
                 const emoji = getEmojiForCategory(item.category_name);
                 const qty = item.quantity || 1;
+                const itemPrice = item.price || 0;
+                const itemTotal = itemPrice * qty;
+                total += itemTotal;
+                
                 return `
                     <div class="cart-item">
                         <div class="cart-item-image">
-                            ${item.image ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">${emoji}</span>` : `<span>${emoji}</span>`}
+                            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : `<span>${emoji}</span>`}
                         </div>
                         <div class="cart-item-details">
                             <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-price">$${(item.price || 0).toFixed(2)}</div>
+                            <div class="cart-item-price">$${itemPrice.toFixed(2)}</div>
                             <div class="cart-item-qty">
-                                <button class="qty-btn" onclick="updateCartQty(${item.cart_id}, ${qty - 1})">-</button>
+                                <button class="qty-btn" onclick="updateCartQty('${item.cart_id}', ${qty - 1})">-</button>
                                 <span class="qty-value">${qty}</span>
-                                <button class="qty-btn" onclick="updateCartQty(${item.cart_id}, ${qty + 1})">+</button>
+                                <button class="qty-btn" onclick="updateCartQty('${item.cart_id}', ${qty + 1})">+</button>
                             </div>
                         </div>
-                        <button class="cart-item-remove" onclick="removeFromCart(${item.cart_id})">
+                        <button class="cart-item-remove" onclick="removeFromCart('${item.cart_id}')">
                             <i class="ri-delete-bin-line"></i>
                         </button>
                     </div>
                 `;
             }).join('');
+            
+            totalEl.textContent = '$' + total.toFixed(2);
+            checkoutBtn.disabled = false;
         }
 
         async function updateCartQty(cartId, quantity) {
+            cartId = String(cartId);
+            
             if (quantity <= 0) {
                 await removeFromCart(cartId);
                 return;
             }
             
             try {
-                await api('/api/cart/update/' + cartId, {
+                const result = await api('/api/cart/update/' + cartId, {
                     method: 'PUT',
-                    body: JSON.stringify({ quantity })
+                    body: JSON.stringify({ quantity: quantity })
                 });
-                loadCart();
+                
+                if (result.success) {
+                    loadCart();
+                } else {
+                    showToast('Failed to update quantity');
+                }
             } catch (error) {
                 showToast('Failed to update');
             }
         }
 
         async function removeFromCart(cartId) {
+            cartId = String(cartId);
+            
             try {
                 await api('/api/cart/remove/' + cartId, { method: 'DELETE' });
                 loadCart();
@@ -846,7 +853,29 @@
                 showToast('Cart is empty');
                 return;
             }
+            
+            const group = document.getElementById('useSavedAddressGroup');
+            const checkbox = document.getElementById('useSavedAddress');
+            
+            if (currentUser && currentUser.address) {
+                group.style.display = 'block';
+                checkbox.checked = false;
+            } else {
+                group.style.display = 'none';
+            }
+            
             document.getElementById('checkoutModal').classList.add('show');
+        }
+
+        function toggleSavedAddress() {
+            const checkbox = document.getElementById('useSavedAddress');
+            const addressField = document.getElementById('deliveryAddress');
+            
+            if (checkbox.checked && currentUser && currentUser.address) {
+                addressField.value = currentUser.address;
+            } else {
+                addressField.value = '';
+            }
         }
 
         function closeCheckoutModal() {
