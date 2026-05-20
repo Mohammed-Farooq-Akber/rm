@@ -1,3 +1,10 @@
+<think>
+The user wants the complete updated index.html file. Let me provide the full HTML file with all the updates including the cart fixes.
+</think>
+
+# Complete Updated index.html
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +82,6 @@
         .product-pricing { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         .current-price { font-size: 22px; font-weight: 700; color: var(--primary); }
         .original-price { font-size: 14px; color: var(--gray); text-decoration: line-through; }
-        .discount-tag { font-size: 12px; color: var(--danger); font-weight: 600; }
         .product-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .unit { font-size: 13px; color: var(--gray); }
         .stock-status { font-size: 12px; padding: 4px 10px; border-radius: 20px; }
@@ -138,7 +144,6 @@
         .cart-total-label { font-size: 16px; font-weight: 500; }
         .cart-total-value { font-size: 24px; font-weight: 700; color: var(--primary); }
         .checkout-btn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
-        .checkout-btn:hover { background: var(--primary-dark); }
         .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2000; }
@@ -353,7 +358,6 @@
                             Use my saved address
                         </label>
                     </div>
-                    
                     <div class="form-group">
                         <label>Delivery Address</label>
                         <textarea name="address" id="deliveryAddress" required rows="3" placeholder="Enter delivery address"></textarea>
@@ -496,7 +500,6 @@
             }
         }
 
-        // ===== RENDER CATEGORIES =====
         function renderCategoriesGrid() {
             const grid = document.getElementById('productsGrid');
             if (categories.length === 0) {
@@ -517,7 +520,6 @@
             `).join('');
         }
 
-        // ===== LOAD PRODUCTS BY CATEGORY =====
         async function loadProductsByCategory(categoryId) {
             const grid = document.getElementById('productsGrid');
             const title = document.getElementById('sectionTitle');
@@ -551,7 +553,7 @@
                 
                 return `
                     <div class="product-card">
-                        <div class="product-image">
+                    <div class="product-image">
                             ${product.image ? `<img src="${product.image}" alt="${product.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="emoji" style="display:none">${emoji}</span>` : `<span class="emoji">${emoji}</span>`}
                             ${discount > 0 ? `<span class="badge-sale">-${discount}%</span>` : ''}
                             ${product.featured ? `<span class="badge-featured">Featured</span>` : ''}
@@ -584,171 +586,134 @@
             const query = document.getElementById('searchInput').value.trim();
             if (!query) return loadProducts('all');
             
-            const filtered = products.filter(p => 
-                p.name.toLowerCase().includes(query.toLowerCase())
-            );
-            
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
             renderProducts(filtered);
             document.getElementById('sectionTitle').textContent = 'Search: "' + query + '"';
         }
 
         document.getElementById('searchInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') searchProducts();
-        }); 
+        });
+
         // ===== CART =====
-async function addToCart(productId) {
-    try {
-        const result = await api('/api/cart/add', {
-            method: 'POST',
-            body: JSON.stringify({
-                product_id: productId,
-                quantity: 1,
-                user_id: currentUser?.id || null,
-                session_id: currentUser ? null : sessionId
-            })
-        });
-        
-        console.log('Add to cart result:', result);
-        
-        if (result.success) {
-            showToast('Added to cart!');
-            loadCart();
-        } else {
-            showToast('Failed to add: ' + (result.message || 'Unknown error'));
+        async function addToCart(productId) {
+            try {
+                const result = await api('/api/cart/add', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        product_id: productId,
+                        quantity: 1,
+                        user_id: currentUser?.id || null,
+                        session_id: currentUser ? null : sessionId
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('Added to cart!');
+                    loadCart();
+                }
+            } catch (error) {
+                showToast('Failed to add');
+            }
         }
-    } catch (error) {
-        console.error('Add to cart error:', error);
-        showToast('Failed to add');
-    }
-}
 
-async function loadCart() {
-    try {
-        const params = new URLSearchParams();
-        
-        if (currentUser?.id) {
-            params.append('user_id', currentUser.id);
-        } else {
-            params.append('session_id', sessionId);
+        async function loadCart() {
+            try {
+                const params = new URLSearchParams();
+                
+                if (currentUser?.id) {
+                    params.append('user_id', currentUser.id);
+                } else {
+                    params.append('session_id', sessionId);
+                }
+                
+                const result = await api('/api/cart?' + params.toString());
+                
+                if (result.success) {
+                    cart = result.data || [];
+                    renderCart();
+                    
+                    const totalItems = cart.reduce((sum, item) => sum + (item.cart_quantity || 1), 0);
+                    document.getElementById('cartBadge').textContent = totalItems;
+                }
+            } catch (error) {
+                console.error('Cart error:', error);
+            }
         }
-        
-        const result = await api('/api/cart?' + params.toString());
-        console.log('Load cart result:', result);
-        
-        if (result.success) {
-            cart = result.data || [];
-            console.log('Cart items:', cart);
-            renderCart();
+
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
             
-            const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-            document.getElementById('cartBadge').textContent = totalItems;
-        }
-    } catch (error) {
-        console.error('Cart error:', error);
-    }
-}
-
-function renderCart() {
-    const container = document.getElementById('cartItems');
-    const totalEl = document.getElementById('cartTotal');
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    
-    console.log('Rendering cart, items:', cart);
-    
-    if (!cart || cart.length === 0) {
-        container.innerHTML = '<div class="cart-empty"><i class="ri-shopping-cart-line"></i><p>Cart is empty</p></div>';
-        totalEl.textContent = '$0.00';
-        checkoutBtn.disabled = true;
-        return;
-    }
-    
-    let total = 0;
-    
-    container.innerHTML = cart.map((item) => {
-        const emoji = getEmojiForCategory(item.category_name);
-        const qty = item.quantity || 1;
-        const itemPrice = parseFloat(item.price) || 0;
-        const itemTotal = itemPrice * qty;
-        total += itemTotal;
-        
-        const cartId = item.id || item.cart_id;
-        console.log('Cart item:', item, 'Cart ID:', cartId);
-        
-        return `
-            <div class="cart-item">
-                <div class="cart-item-image">
-                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : `<span>${emoji}</span>`}
-                </div>
-                <div class="cart-item-details">
-                    <div class="cart-item-name">${item.name || 'Product'}</div>
-                    <div class="cart-item-price">$${itemPrice.toFixed(2)}</div>
-                    <div class="cart-item-qty">
-                        <button class="qty-btn" onclick="updateCartQty('${cartId}', ${qty - 1})">-</button>
-                        <span class="qty-value">${qty}</span>
-                        <button class="qty-btn" onclick="updateCartQty('${cartId}', ${qty + 1})">+</button>
+            if (!cart || cart.length === 0) {
+                container.innerHTML = '<div class="cart-empty"><i class="ri-shopping-cart-line"></i><p>Cart is empty</p></div>';
+                totalEl.textContent = '$0.00';
+                checkoutBtn.disabled = true;
+                return;
+            }
+            
+            let total = 0;
+            
+            container.innerHTML = cart.map((item) => {
+                const emoji = getEmojiForCategory(item.category_name);
+                const qty = item.cart_quantity || 1;
+                const itemPrice = parseFloat(item.price) || 0;
+                const itemTotal = itemPrice * qty;
+                total += itemTotal;
+                
+                const cartId = item.cart_id;
+                
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-image">
+                            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : `<span>${emoji}</span>`}
+                        </div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name || 'Product'}</div>
+                            <div class="cart-item-price">$${itemPrice.toFixed(2)}</div>
+                            <div class="cart-item-qty">
+                                <button class="qty-btn" onclick="updateCartQty('${cartId}', ${qty - 1})">-</button>
+                                <span class="qty-value">${qty}</span>
+                                <button class="qty-btn" onclick="updateCartQty('${cartId}', ${qty + 1})">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart('${cartId}')">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
                     </div>
-                </div>
-                <button class="cart-item-remove" onclick="removeFromCart('${cartId}')">
-                    <i class="ri-delete-bin-line"></i>
-                </button>
-            </div>
-        `;
-    }).join('');
-    
-    totalEl.textContent = '$' + total.toFixed(2);
-    checkoutBtn.disabled = false;
-}
-
-async function updateCartQty(cartId, quantity) {
-    console.log('Updating cart:', cartId, 'to qty:', quantity);
-    
-    if (!cartId) {
-        console.error('No cart ID provided');
-        showToast('Error: No cart ID');
-        return;
-    }
-    
-    if (quantity <= 0) {
-        await removeFromCart(cartId);
-        return;
-    }
-    
-    try {
-        const result = await api('/api/cart/update/' + cartId, {
-            method: 'PUT',
-            body: JSON.stringify({ quantity: quantity })
-        });
-        
-        console.log('Update result:', result);
-        
-        if (result.success) {
-            loadCart();
-        } else {
-            showToast('Failed to update');
+                `;
+            }).join('');
+            
+            totalEl.textContent = '$' + total.toFixed(2);
+            checkoutBtn.disabled = false;
         }
-    } catch (error) {
-        console.error('Update error:', error);
-        showToast('Failed to update');
-    }
-}
 
-async function removeFromCart(cartId) {
-    console.log('Removing cart item:', cartId);
-    
-    if (!cartId) {
-        console.error('No cart ID to remove');
-        return;
-    }
-    
-    try {
-        const result = await api('/api/cart/remove/' + cartId, { method: 'DELETE' });
-        console.log('Remove result:', result);
-        loadCart();
-    } catch (error) {
-        console.error('Remove error:', error);
-        showToast('Failed to remove');
-    }
-}
+        async function updateCartQty(cartId, quantity) {
+            if (quantity <= 0) {
+                await removeFromCart(cartId);
+                return;
+            }
+            
+            try {
+                await api('/api/cart/update/' + cartId, {
+                    method: 'PUT',
+                    body: JSON.stringify({ quantity: quantity })
+                });
+                loadCart();
+            } catch (error) {
+                showToast('Failed to update');
+            }
+        }
+
+        async function removeFromCart(cartId) {
+            try {
+                await api('/api/cart/remove/' + cartId, { method: 'DELETE' });
+                loadCart();
+            } catch (error) {
+                showToast('Failed to remove');
+            }
+        }
 
         function openCart() {
             document.getElementById('cartOverlay').classList.add('show');
@@ -871,10 +836,6 @@ async function removeFromCart(cartId) {
             loadCart();
         }
 
-        function showOrders() {
-            window.location.href = '/orders.html';
-        }
-
         // ===== CHECKOUT =====
         function openCheckout() {
             if (cart.length === 0) {
@@ -883,11 +844,9 @@ async function removeFromCart(cartId) {
             }
             
             const group = document.getElementById('useSavedAddressGroup');
-            const checkbox = document.getElementById('useSavedAddress');
-            
             if (currentUser && currentUser.address) {
                 group.style.display = 'block';
-                checkbox.checked = false;
+                document.getElementById('useSavedAddress').checked = false;
             } else {
                 group.style.display = 'none';
             }
@@ -929,7 +888,7 @@ async function removeFromCart(cartId) {
                 if (result.success) {
                     closeCheckoutModal();
                     closeCart();
-                    showToast('Order placed! Order ID: ' + (result.orderId || '').substring(0, 8) + '...');
+                    showToast('Order placed!');
                     document.getElementById('checkoutForm').reset();
                     loadCart();
                 }
@@ -962,4 +921,4 @@ async function removeFromCart(cartId) {
         });
     </script>
 </body>
-</html>
+</html>                        
